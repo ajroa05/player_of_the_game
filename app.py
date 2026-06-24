@@ -2,20 +2,28 @@ import statsapi
 
 ORIOLES_TEAM_ID = 110
 
-def CheckIfHome(gameData :dict, teamID: int) -> bool:
-    box_data
+def check_if_home(game_data :dict, team_id: int) -> bool:
+    home_team = game_data.get("home").get("team")
 
-    print(homeTeam)
-
-    return false
+    if (home_team == team_id):
+        return True
+    else:
+        return False
 
 
 def main():
-    recentGameID = statsapi.last_game(ORIOLES_TEAM_ID)
+    recent_game_id = statsapi.last_game(ORIOLES_TEAM_ID)
 
-    box_data = statsapi.boxscore_data(recentGameID)
+    box_data = statsapi.boxscore_data(recent_game_id)
 
-    isHome = CheckIfHome(box_data, ORIOLES_TEAM_ID)
+    isHome = check_if_home(box_data, ORIOLES_TEAM_ID)
+
+    if (isHome):
+        team_batters = box_data.get("homeBatters")
+        print(team_batters.keys())
+    else:
+        team_batters = box_data.get("awayBatters")
+        print(team_batters.keys())
 
     # print(recentGameID)
 
